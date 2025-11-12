@@ -6,7 +6,6 @@ __pycache__/
 build/
 dist/
 visualization/
-image_folder/
 datasets/
 *.zip
 *.mp4
@@ -14,7 +13,6 @@ datasets/
 *.JPEG
 *.jpg
 *.png
-*.pth
 *.tar.gz
 *.log
 *.DS_Store

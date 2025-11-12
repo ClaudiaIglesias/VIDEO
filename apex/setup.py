@@ -908,7 +908,7 @@ if has_flag("--gpu_direct_storage", "APEX_GPU_DIRECT_STORAGE"):
 
 
 # Patch because `setup.py bdist_wheel` and `setup.py develop` do not support the `parallel` option
-parallel = None # type: Optional[int]
+parallel:Optional[int] = None # type: Optional[int]
 if "--parallel" in sys.argv:
     idx = sys.argv.index("--parallel")
     parallel = int(sys.argv[idx + 1])
