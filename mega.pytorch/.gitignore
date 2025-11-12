@@ -35,4 +35,4 @@ dist/
 /models
 
 # dataset
-image_folder/
+#image_folder/
