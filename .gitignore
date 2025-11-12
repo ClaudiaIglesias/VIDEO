@@ -10,9 +10,7 @@ datasets/
 *.zip
 *.mp4
 *.avi
-*.JPEG
-*.jpg
-*.png
+*.git 
 *.tar.gz
 *.log
 *.DS_Store
