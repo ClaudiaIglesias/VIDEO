@@ -10,59 +10,49 @@ This repository documents the full installation and configuration process to run
 - NVIDIA GPU
 
 ---
+## Installation
 
-## Step by step installation
+First the conda enviroment needs to be created and activated by running the following commands:
 
-conda create --name MEGA -y python=3.7
-source activate MEGA
-
-conda install ipython pip
-pip install ninja yacs cython matplotlib tqdm opencv-python scipy
-
-# follow PyTorch installation in https://pytorch.org/get-started/locally/
-# we give the instructions for CUDA 10.0
-
-conda install pytorch=1.2.0 torchvision=0.4.0 cudatoolkit=10.0 -c pytorch
-
-export INSTALL_DIR=$PWD
-
-# install pycocotools
-cd $INSTALL_DIR
-git clone https://github.com/cocodataset/cocoapi.git
-cd cocoapi/PythonAPI
-python setup.py build_ext install
-
-# install cityscapesScripts
-cd $INSTALL_DIR
-git clone https://github.com/mcordts/cityscapesScripts.git
-cd cityscapesScripts/
-python setup.py build_ext install
-
-# install apex
-cd $INSTALL_DIR
-git clone https://github.com/NVIDIA/apex.git
-cd apex
-python setup.py build_ext install
-
-# install PyTorch Detection
-cd $INSTALL_DIR
-git clone https://github.com/Scalsol/mega.pytorch.git
-cd mega.pytorch
-
-# the following will install the lib with
-# symbolic links, so that you can modify
-# the files if you want and won't need to
-# re-build it
-python setup.py build develop
-
-pip install 'pillow<7.0.0'
-
-unset INSTALL_DIR
+    conda create --name MEGA -y python=3.7
+    source activate MEGA
 
 
-## Execute the demo
+Next, it is necesssary to install some packages to be able to run de code. To do so, run the `install_requirements.sh` script.
+To do this, first its neccesary to give permission to run this script:
 
-python demo/demo.py base configs/vid_R_101_C4_1x.yaml R_101.pth --suffix ".JPEG" --visualize-path image_folder --output-folder visualization_base
+    chmod +x install_requirements.sh
+
+Finally, run the script like
+
+    ./install_requirements.sh
 
 
-python demo/demo.py mega configs/MEGA/vid_R_101_C4_MEGA_1x.yaml MEGA_R_101.pth --suffix ".JPEG" --visualize-path image_folder --output-folder visualization_mega
+
+## Executing the demo
+
+First, we need to download the models we will be using. In this case the *single-frame baseline* and *MEGA* models from backbone ResNet-101. You can find this models in the following link: https://github.com/Scalsol/mega.pytorch.
+This models should be in the mega.pytorch folder.
+
+
+When the installation is completed and the models downloadeed, go to the mega.pytorch folder
+
+    cd mega.pytorch/
+
+And the code can be runned with the base model with the following command
+
+    python demo/demo.py base configs/vid_R_101_C4_1x.yaml R_101.pth --suffix ".JPEG" --visualize-path image_folder --output-folder visualization_base
+
+This will create a folder named `visualization_base` inside the mega.pytorch folder with the output of running the model on the images in `image_folder`. An image_folder with a sequence of images is allready provided. But it is possible to change it with other images if desired. Take into account the image names must follow the correct names.
+
+To use the MEGA model you just need to:
+
+    python demo/demo.py mega configs/MEGA/vid_R_101_C4_MEGA_1x.yaml MEGA_R_101.pth --suffix ".JPEG" --visualize-path image_folder --output-folder visualization_mega
+
+And the output will be saved in the folder `visualization_mega` inside mega.pytorch, same as before.
+
+
+You can run any model you want by downloading it and following the command structure:
+
+    python demo/demo.py ${METHOD} ${CONFIG_FILE} ${CHECKPOINT_FILE} [--visualize-path ${IMAGE-FOLDER}] [--suffix ${IMAGE_SUFFIX}][--output-folder ${FOLDER}] [--output-video]
+

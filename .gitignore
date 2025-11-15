@@ -1,7 +1,6 @@
 __pycache__/
 *.pyc
 *.pyo
-*.pth
 *.egg-info/
 build/
 dist/
@@ -14,3 +13,5 @@ datasets/
 *.tar.gz
 *.log
 *.DS_Store
+visualization_base/
+visualization_mega/
