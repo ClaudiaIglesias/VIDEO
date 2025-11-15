@@ -39,7 +39,7 @@ To run the demo, you must download the pretrained weights. We use two models:
 
 Both with ResNet-101 backbone.
 
-These models can be downloaded from the official MEGA repository:
+These models can be downloaded from the official MEGA repository (Download link in the Main Results section in the README):
 
 https://github.com/Scalsol/mega.pytorch
 
